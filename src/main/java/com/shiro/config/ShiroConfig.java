@@ -83,8 +83,6 @@ public class ShiroConfig {
         selfRealm.setAuthenticationCacheName();  //默认getClass().getName() + DEFAULT_AUTHORIZATION_CACHE_SUFFIX
         selfRealm.setAuthorizationCache();  //Cache<Object, AuthorizationInfo> authorizationCache
         selfRealm.setAuthorizationCacheName();//name + DEFAULT_AUTHORIZATION_CACHE_SUFFIX*/
-
-
         return new SelfRealm();
     }
 
@@ -122,33 +120,6 @@ public class ShiroConfig {
         credentialsMatcher.setStoredCredentialsHexEncoded(false);
         return  credentialsMatcher;
     }
-  /*
-    public SslFilter sslFilter(){
-        SslFilter sslFilter = new SslFilter();
-        sslFilter.setPort(8443);
-        return sslFilter;
-    }
-
-    public FormAuthenticationFilter authenticationFilter(){
-        FormAuthenticationFilter formAuthenticationFilter = new FormAuthenticationFilter();
-        formAuthenticationFilter.setLoginUrl();
-        formAuthenticationFilter.setUsernameParam();
-        formAuthenticationFilter.setPasswordParam();
-        formAuthenticationFilter.setRememberMeParam();
-        return formAuthenticationFilter;
-    }
-
-  public KickoutSessionControlFilter kickoutSessionControlFilter(){
-      KickoutSessionControlFilter kickout = new KickoutSessionControlFilter();
-      kickout.setKickoutUrl();
-      kickout.setKickoutAfter();
-      kickout.setMaxSession();
-      kickout.setCacheManager();
-      kickout.setSessionManager();
-      return kickout;
-  }
- */
-
     /**
      * 过滤器，表示接口的拦截和跳转
      *
@@ -159,13 +130,6 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shirFilter(org.apache.shiro.mgt.SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-
-       /* Map<String,Filter> map = new HashMap<>();
-        map.put("sslFilter",sslFilter());
-        map.put("formAuthenticationFilter",authenticationFilter());
-        map.put("kickoutSessionControlFilter",kickoutSessionControlFilter())
-        shiroFilterFactoryBean.setFilters(map);*/
-
 
         shiroFilterFactoryBean.setLoginUrl("/login");
         shiroFilterFactoryBean.setSuccessUrl("/index");
@@ -199,13 +163,6 @@ public class ShiroConfig {
         SimpleCookie cookie = new SimpleCookie("rememberMe");
         //单位为秒
         cookie.setMaxAge(60);
-      /*  cookie.setPath();
-        cookie.setHttpOnly();
-        cookie.setDomain();
-        cookie.setName();
-        cookie.setComment();
-        .....
-        */
         return cookie;
     }
 
@@ -241,21 +198,6 @@ public class ShiroConfig {
         return authorizationAttributeSourceAdvisor;
     }
 
-  /*  *//**
-     * 缓存管理器
-     * @return
-     *//*
-    public RedisManager redisManager() {
-        RedisManager redisManager = new RedisManager();
-        return redisManager;
-    }
-
-    public RedisCacheManager redisCacheManager() {
-        RedisCacheManager redisCacheManager = new RedisCacheManager();
-        redisCacheManager.setRedisManager(redisManager());
-        return redisCacheManager;
-    }*/
-
     @Bean
     public RedissonClient redissonClient() throws IOException {
         ClassPathResource classPathResource = new ClassPathResource("redisson-config.yaml");
@@ -285,26 +227,6 @@ public class ShiroConfig {
     public ShiroDialect shiroDialect() {
         return new ShiroDialect();
     }
-
-   /*
-   EhCache版本
-   @Bean
-    public SessionDAO sessionDAO() {
-        MemorySessionDAO sessionDAO = new MemorySessionDAO();
-        return sessionDAO;
-    }*/
-
-    /**
-     * 会话DAO
-     * @return
-     */
-  /*  @Bean
-    public RedisSessionDAO redisSessionDAO() {
-        RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
-        redisSessionDAO.setRedisManager(redisManager());
-        return redisSessionDAO;
-    }*/
-
 
   @Bean
   public RedissonSessionDao redisSessionDAO() throws IOException {

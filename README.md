@@ -47,6 +47,15 @@ org.apache.shiro.session.mgt.SimpleSession 是 Shiro 的默认 session 实现。
 Shiro 内置的 session manager 使用计划任务来清理失效 session。而 shiro-redisson 使用 redis 的 “Expire” 命令来达到相同的效果。这个命令为 redis 中的 key 设置超时时间。 超时之后这个 key 会被自动删除。
 ```
 
+### 实现的部分
+- 一部分是通过这样的方法，集成了RedissonClient的对象，可以操作Redisson封装好的对象，很便捷，不需要jedis操作原始命令
+- 一部分是会话管理，通过集成了RedissonWebSessionManager，能够利用Redisson去操作session的存储
+```text
+在缓存中建立了：
+redisson_timeout_set
+redisson_sortedset_comparator
+session:attr/info
+```
 
 ### 可扩展部分
 - 之前在spring boot shiro redis部分做了fastjson的自定义序列化，这边也可以同样使用，但暂未集成进来
