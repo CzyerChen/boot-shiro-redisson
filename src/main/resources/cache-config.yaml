@@ -1,0 +1,9 @@
+---
+shiro-authenticationCache:
+  ttl: 0
+  maxIdleTime: 0
+  maxSize: 10000
+shiro-authorizationCache:
+  ttl: 0
+  maxIdleTime: 0
+  maxSize: 10000

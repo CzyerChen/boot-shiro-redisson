@@ -1,0 +1,7 @@
+.idea/
+target/
+out/
+*.iml
+/.idea/modules.xml
+/.idea/vcs.xml
+/LOG_HOME_IS_UNDEFINED/*
